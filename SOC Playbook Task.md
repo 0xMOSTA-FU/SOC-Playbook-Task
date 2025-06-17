@@ -652,6 +652,7 @@ Get-WmiObject win32_service |
 # Refrences:
 
 SOC Structure & Roles:
+
 [NIST SP 800-61r2](https://csrc.nist.gov/pubs/sp/800/61/r2/final)
 
 [SANS](https://www.sans.org/media/analyst-program/common-practices-security-operations-centers-results-2019-soc-survey-39060.pdf)
