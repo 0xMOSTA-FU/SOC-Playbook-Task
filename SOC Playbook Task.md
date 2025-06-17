@@ -653,10 +653,16 @@ Get-WmiObject win32_service |
 
 SOC Structure & Roles:
 [NIST SP 800-61r2](https://csrc.nist.gov/pubs/sp/800/61/r2/final)
+
 [SANS](https://www.sans.org/media/analyst-program/common-practices-security-operations-centers-results-2019-soc-survey-39060.pdf)
+
 [SANS](https://www.sans.org/posters/guide-to-security-operations/)
+
 [MITRE News & Insights](https://www.mitre.org/news-insights)
+
 For ongoing validation:
 [CISA](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)
+
 [NIST NVD](https://nvd.nist.gov/)
+
 [krebsOnSecurity](https://krebsonsecurity.com/)
