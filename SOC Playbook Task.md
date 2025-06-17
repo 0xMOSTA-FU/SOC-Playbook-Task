@@ -641,11 +641,15 @@ Get-WmiObject win32_service |
 
 ### **8.2 Threat Actor TTP Database**
 
-| Group   | Preferred Initial Access | Common Tools  | Detection Signatures          |
-| ------- | ------------------------ | ------------- | ----------------------------- |
-| APT29   | Phishing with DOCX       | Cobalt Strike | Office spawning PS            |
-| FIN7    | Malicious LNK files      | Carbanak      | LNK downloading DLL           |
-| Lazarus | Exploit Kits             | Ryuk          | PE resource section anomalies |
+---
+
+| Group | Preferred Initial Access | Common Tools | Detection Signatures |
+|---|---|---|---|
+| **APT29** | Phishing with DOCX | Cobalt Strike | Office spawning PS |
+| **FIN7** | Malicious LNK files | Carbanak | LNK downloading DLL |
+| **Lazarus** | Exploit Kits, Phishing (Spearphishing), Supply Chain Attacks | **Manuscrypt, Destover** | **Suspicious PowerShell/DLL execution from temp folders; C2 traffic to known IPs/domains; Registry/Scheduled Task persistence** |
+
+---
 
 
 Mandiant also identified APT29 utilizing a malicious docx to deliver an HTA dropper, resulting in the delivery and execution of BEATDROP on a target system, in a separate but similar phishing campaign.
