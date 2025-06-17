@@ -702,6 +702,57 @@ Figure 6: FIN7 PowerShell Executions from 2021
 With this better insight into how FIN7 operates, we started combining various suspected unidentified threat groups (UNCs) under the FIN7 designation. Through this work, we pinpointed new FIN7 campaigns aimed at our clients, including a **Managed Defense Rapid Response** involvement in 2021.
 
 ------
+
+## Understanding the Lazarus Supply-Chain Attack
+To grasp this innovative supply-chain attack, you should know that internet users in South Korea frequently need to install extra security software when they visit government or online banking platforms.
+
+WIZVERA VeraPort, which acts as an integration installation program, is a South Korean application designed to oversee this supplementary security software. Once WIZVERA VeraPort is on a user's device, it allows them to receive and install all the necessary software a particular website needs (for example, browser plug-ins, security applications, identity verification tools, etc.) with minimal effort. This software is typically used by South Korean government and banking sites. For some of these websites, having WIZVERA VeraPort installed is a mandatory requirement for users to access their services.
+
+![image](https://github.com/user-attachments/assets/23881e48-b8db-4b25-92d0-164e85a3c658)
+### A WIZVERA VeraPort window displayed to the user when installing additional software
+
+### How Lazarus Exploited WIZVERA VeraPort
+
+The Lazarus attackers leveraged the aforementioned process for installing security software to deploy their malware from a legitimate, yet compromised, website. It's worth noting, however, that successfully delivering malware this way depended on several prerequisites; that's why Lazarus used it in only a few campaigns. For this attack to work:
+
+* The victim needed to have WIZVERA VeraPort software already installed.
+* The victim had to visit a compromised website that supported WIZVERA VeraPort.
+* This specific website had to contain particular entries in its VeraPort configuration file, allowing the attackers to swap out standard software in its VeraPort bundle with their malware.
+
+Based on our analysis, it's crucial to understand that we believe these supply-chain attacks happened on websites that *use* WIZVERA VeraPort, rather than directly targeting WIZVERA itself.
+
+Websites that support WIZVERA VeraPort software include a server-side element, specifically some JavaScript files and a WIZVERA configuration file. This configuration file is an XML document encoded in base64, holding details like the website's address, a list of software to install, download links, and other settings.
+
+![image](https://github.com/user-attachments/assets/462a83c9-b24b-40e4-8131-637b28f42d57)
+### An example of a WIZVERA VeraPort configuration (redacted by ESET)
+
+### Circumventing Digital Signatures
+These configuration files carry WIZVERA's digital signature. After being downloaded, they undergo verification using a robust cryptographic algorithm (RSA). This strong security measure explains why attackers can't easily alter the content of these configuration files or establish their own counterfeit websites. Nevertheless, the attackers can swap out the software delivered to WIZVERA VeraPort users if they operate from a legitimate but compromised website. We believe this is precisely the scenario the Lazarus attackers exploited.
+![image](https://github.com/user-attachments/assets/93a12249-0b5b-48d5-8df9-d380155de702)
+### Simplified scheme of the WIZVERA supply-chain attack conducted by the Lazarus group
+
+---
+
+### How VeraPort's Signature Check Is Overcome
+
+It's worth noting that WIZVERA VeraPort's configuration offers a function to **verify the digital signature of binary files** it downloads before they execute. This option is typically active by default. However, VeraPort's check is limited to confirming the signature's **validity**, without actually confirming the **identity of the certificate holder**. Consequently, for attackers to misuse WIZVERA VeraPort, they merely require any legitimate code-signing certificate to deploy their harmful programs, or they might get lucky and encounter a VeraPort installation where signature validation isn't even mandated.
+
+To date, we've identified two examples of malware distributed via this supply-chain compromise, both of which carried digital signatures:
+
+| SHA-1 | Filename | Digital Signature |
+|---|---|---|
+| 3D311117D09F4A6AD300E471C2FB2B3C63344B1D | Delfino.exe | ALEXIS SECURITY GROUP, LLC |
+| 3ABFEC6FC3445759730789D4322B0BE73DC695C7 | MagicLineNPIZ.exe | DREAM SECURITY USA INC |
+
+The threat actors resorted to using **unlawfully obtained code-signing certificates** to sign these malicious samples. Interestingly, one of these certificates was issued to the American branch of a South Korean cybersecurity company.
+![image](https://github.com/user-attachments/assets/5b1394a8-2417-4ccd-bea3-406e85c5f78d)
+### The ALEXIS SECURITY GROUP, LLC code-signing certificate used to sign Lazarus malware
+![image](https://github.com/user-attachments/assets/9faa3bc1-771f-4bb2-b1a8-6a0dee332689)
+### The DREAM SECURITY USA INC code-signing certificate used to sign Lazarus malware
+
+
+
+------
 # Refrences:
 
 SOC Structure & Roles:
@@ -717,6 +768,9 @@ SOC Structure & Roles:
 [Google Cloud Blog](https://cloud.google.com/blog/topics/threat-intelligence/tracking-apt29-phishing-campaigns)
 
 [Google Cloud Blog](https://cloud.google.com/blog/topics/threat-intelligence/evolution-of-fin7)
+
+[ESET Research By Anton Cherepanov & Peter Kálnai](https://www.welivesecurity.com/2020/11/16/lazarus-supply-chain-attack-south-korea/)
+
 
 [MITRE ATTACK](https://attack.mitre.org/)
 
