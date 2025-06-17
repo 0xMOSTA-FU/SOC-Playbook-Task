@@ -3,7 +3,7 @@
 
 ## **1. SOC Team Structure & Roles (Expanded)**
 
-### **1.1 SOC Organizational Chart (Enhanced)**
+### **1.1 SOC Organizational Chart (Enhanced based on another task)**
 
 ```mermaid
 graph TD
@@ -353,7 +353,7 @@ graph LR
    AND domain LIKE "%.tk" OR domain LIKE "%.ru"
    ```
 
-### **2.3 Zero-Day Response (Enhanced)**
+### **2.3 Zero-Day Response (Enhanced based on another task)**
 
 **Zero-Day Lifecycle Management:**
 
