@@ -771,6 +771,7 @@ SOC Structure & Roles:
 
 [ESET Research By Anton Cherepanov & Peter Kálnai](https://www.welivesecurity.com/2020/11/16/lazarus-supply-chain-attack-south-korea/)
 
+[AWS Doc](https://docs.aws.amazon.com/cli/latest/reference/cloudtrail/lookup-events.html)
 
 [MITRE ATTACK](https://attack.mitre.org/)
 
