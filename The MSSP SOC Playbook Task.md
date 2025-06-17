@@ -610,7 +610,7 @@ graph LR
 2. What containment strategies would work?
 3. How to communicate with affected clients?
 
-## **8. Enhanced Appendices**
+## **8. (Enhanced based on another task) Appendices**
 
 ### **8.1 Command Reference Cheat Sheets**
 
