@@ -648,6 +648,11 @@ Get-WmiObject win32_service |
 | Lazarus | Exploit Kits             | Ryuk          | PE resource section anomalies |
 
 
+Mandiant also identified APT29 utilizing a malicious docx to deliver an HTA dropper, resulting in the delivery and execution of BEATDROP on a target system, in a separate but similar phishing campaign.
+
+![image](https://github.com/user-attachments/assets/87df9de8-238e-42a5-a1f7-96479e977ee8)
+
+
 ------
 # Refrences:
 
@@ -660,6 +665,10 @@ SOC Structure & Roles:
 [SANS](https://www.sans.org/posters/guide-to-security-operations/)
 
 [MITRE News & Insights](https://www.mitre.org/news-insights)
+
+[Google Cloud Blog](https://cloud.google.com/blog/topics/threat-intelligence/tracking-apt29-phishing-campaigns)
+
+[MITRE ATTACK](https://attack.mitre.org/)
 
 For ongoing validation:
 
