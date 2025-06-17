@@ -661,6 +661,7 @@ SOC Structure & Roles:
 [MITRE News & Insights](https://www.mitre.org/news-insights)
 
 For ongoing validation:
+
 [CISA](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)
 
 [NIST NVD](https://nvd.nist.gov/)
