@@ -656,6 +656,50 @@ Mandiant also identified APT29 utilizing a malicious docx to deliver an HTA drop
 
 ![image](https://github.com/user-attachments/assets/87df9de8-238e-42a5-a1f7-96479e977ee8)
 
+---
+
+## PowerShell Archaeology: FIN7's Enduring Affinity
+
+It's undeniable: PowerShell is FIN7's preferred method of communication. While FIN7 has incorporated malware written in numerous programming languages into their attack campaigns, their strong inclination for custom PowerShell-based loaders and distinct PowerShell commands stands out during direct system interaction.
+
+Our in-depth analysis of previous FIN7 breaches, extending back to 2019, revealed several persistent patterns of unusual PowerShell commands that they continue to employ today. For instance, command lines similar to those shown in Figure 2 and Figure 3 exhibited very low global usage outside of FIN7's operations and suspected unclassified threat groups (UNCs) associated with them.
+
+```
+cmd.exe /c start %SYSTEMROOT%\system32\WindowsPowerShell\v1.0\powershell.exe -noni 
+-nop -exe bypass -f <REDACTED>/ADMIN$/temp/wO9EBGmDqwdc.ps1
+```
+Figure 2: FIN7 PowerShell Execution from 2019
+
+```
+cmd.exe /c start %SYSTEMROOT%\system32\WindowsPowerShell\v1.0\powershell.exe -noni 
+-nop -exe bypass -f \\<REDACTED>\Admin$\c5k3fsys.3bp.ps1
+```
+Figure 3: FIN7 PowerShell Execution from 2021
+
+What makes the commands in Figure 2 and Figure 3 unique are the specific parameters **-noni -nop -exe bypass -f**, used for initiating scripts located on Admin shares and setting up Windows services. Since 2019, we've observed FIN7 utilizing such command-line parameters when engaging with compromised systems, often via backdoor malware like CARBANAK. More recently, we've noted a shift where some of these distinctive PowerShell commands are being launched through POWERPLANT compromises.
+
+### More on FIN7's PowerShell Techniques
+
+Besides the specific command lines FIN7 uses during their attacks, we also discovered their consistent use of other PowerShell script variants, like **POWERTRASH**. This tool acts as an **in-memory dropper** or **loader**, coded in PowerShell, designed to run a hidden malicious payload. We've seen FIN7's POWERTRASH deliver various payloads, including **CARBANAK, DICELOADER, SUPERSOFT, BEACON**, and **PILLOWMINT**. POWERTRASH is a distinct, **obfuscated (hidden)** version of a shellcode invoker that's part of the **PowerSploit** framework, which is publicly available on GitHub.
+
+```powershell
+powershell.exe -ex bypass -file C:\windows\temp\fdddu32.ps1
+```
+Figure 4: FIN7 PowerShell Execution from 2019
+
+```powershell
+powershell.exe -ex bypass -f c:\users\public\temp\AC-Win10w-x64.ps1
+powershell.exe -ex bypass -f C:\Users\Public\Videos\AC-Bot-x64.ps1
+```
+Figure 5: FIN7 PowerShell Execution from 2020
+
+```powershell
+powershell.exe -ex bypass -f pkit.ps1                    
+powershell.exe -ex bypass -f cube.ps1
+```
+Figure 6: FIN7 PowerShell Executions from 2021
+
+With this better insight into how FIN7 operates, we started combining various suspected unidentified threat groups (UNCs) under the FIN7 designation. Through this work, we pinpointed new FIN7 campaigns aimed at our clients, including a **Managed Defense Rapid Response** involvement in 2021.
 
 ------
 # Refrences:
@@ -671,6 +715,8 @@ SOC Structure & Roles:
 [MITRE News & Insights](https://www.mitre.org/news-insights)
 
 [Google Cloud Blog](https://cloud.google.com/blog/topics/threat-intelligence/tracking-apt29-phishing-campaigns)
+
+[Google Cloud Blog](https://cloud.google.com/blog/topics/threat-intelligence/evolution-of-fin7)
 
 [MITRE ATTACK](https://attack.mitre.org/)
 
